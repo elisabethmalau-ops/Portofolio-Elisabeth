@@ -999,8 +999,8 @@ ul { list-style: none; }
     flex-direction: column-reverse;
     align-items: center;
     text-align: center;
-    padding-top: -7rem;       /* ← dikurangi */
-    padding-bottom: -7rem;    /* ← dikurangi */
+    padding-top: -7.0rem;       /* ← dikurangi */
+    padding-bottom: -7.0rem;    /* ← dikurangi */
     gap: 0.5;                  /* ← hapus gap */
   }
 
