@@ -527,7 +527,6 @@ ul { list-style: none; }
   color: var(--color-primary);
 }
 
-
 /* ════════════════════════════════════════════════
    SKILLS SECTION
 ════════════════════════════════════════════════ */
@@ -605,6 +604,44 @@ ul { list-style: none; }
   font-weight: 700;
   z-index: 3;
 }
+
+/* ════════════════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .skills {
+    padding: 3rem 0 2.5rem;
+  }
+
+  .skills-grid {
+    gap: 1rem;
+    padding: 0 1rem;
+  }
+
+  .skill-card {
+    width: 120px;
+    height: 120px;
+    border-radius: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .skills {
+    padding: 2.5rem 0 2rem;
+  }
+
+  .skills-grid {
+    gap: 0.75rem;
+    padding: 0 0.75rem;
+  }
+
+  .skill-card {
+    width: 100px;
+    height: 100px;
+    border-radius: 14px;
+  }
+}
+
 
 /* ════════════════════════════════════════════════
    RESPONSIVE
