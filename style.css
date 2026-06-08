@@ -1005,7 +1005,7 @@ ul { list-style: none; }
   }
 
   .hero-photo-wrap {
-    margin-bottom: -6rem;    /* ← tarik teks ke atas mendekati foto */
+    margin-bottom: -5rem;    /* ← tarik teks ke atas mendekati foto */
   }
 
   .hero-photo-ring { width: 240px; height: 240px; }
