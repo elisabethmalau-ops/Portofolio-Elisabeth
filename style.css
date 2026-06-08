@@ -999,9 +999,9 @@ ul { list-style: none; }
     flex-direction: column-reverse;
     align-items: center;
     text-align: center;
-    padding-top: 0.5rem;       /* ← dikurangi */
-    padding-bottom: 0.5rem;    /* ← dikurangi */
-    gap: 0;                  /* ← hapus gap */
+    padding-top: 1.0rem;       /* ← dikurangi */
+    padding-bottom: 1.0rem;    /* ← dikurangi */
+    gap: 0.5;                  /* ← hapus gap */
   }
 
   .hero-photo-wrap {
