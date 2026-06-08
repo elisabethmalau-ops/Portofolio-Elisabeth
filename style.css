@@ -724,7 +724,6 @@ ul { list-style: none; }
   text-shadow: 0 2px 8px rgba(0,0,0,0.4);
 }
 
-/* ── Hover overlay untuk kartu tanpa img-hover (Kalkulator & Desain) ── */
 .project-thumb .hover-overlay {
   position: absolute;
   inset: 0;
@@ -739,16 +738,24 @@ ul { list-style: none; }
   align-items: center;
   justify-content: center;
   gap: 0.45rem;
-  opacity: 0;
+  opacity: 0;           /* ← default sembunyi */
+  pointer-events: none; /* ← tidak mengganggu klik saat tersembunyi */
   transition: opacity 0.4s ease;
   z-index: 2;
-  /* Padding agar konten tidak mepet ke tepi box */
   padding: 1.25rem 1.5rem;
 }
+
+/* Desktop */
 .project-thumb:hover .hover-overlay {
   opacity: 1;
+  pointer-events: auto;
 }
 
+/* Mobile touch */
+.hover-overlay.touch-active {
+  opacity: 1;
+  pointer-events: auto;
+}
 /* Gambar default ikut scale saat hover pada kartu tanpa img-hover */
 .project-thumb:has(.hover-overlay):hover .img-default {
   transform: scale(1.05);
