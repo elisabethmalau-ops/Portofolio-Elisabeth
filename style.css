@@ -962,6 +962,11 @@ ul { list-style: none; }
   .about-photo-frame { width: 300px; }
 }
 
+@media (max-width: 1024px) {
+  .about-inner { gap: 3rem; }
+  .about-photo-frame { width: 300px; }
+}
+
 @media (max-width: 768px) {
   .container { padding: 0 24px; }
 
