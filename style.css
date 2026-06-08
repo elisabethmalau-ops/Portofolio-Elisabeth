@@ -999,8 +999,15 @@ ul { list-style: none; }
     flex-direction: column-reverse;
     align-items: center;
     text-align: center;
-    padding-top: 2.5rem;
+    padding-top: 1rem;       /* ← dikurangi */
+    padding-bottom: 1rem;    /* ← dikurangi */
+    gap: 0;                  /* ← hapus gap */
   }
+
+  .hero-photo-wrap {
+    margin-bottom: -4rem;    /* ← tarik teks ke atas mendekati foto */
+  }
+
   .hero-photo-ring { width: 240px; height: 240px; }
   .hero-actions { justify-content: center; }
 
@@ -1013,7 +1020,6 @@ ul { list-style: none; }
 
   .contact-links { flex-direction: column; align-items: center; }
 }
-
 @media (max-width: 480px) {
   .hero-name { font-size: 2.2rem; }
   .skills-grid { gap: 1rem; }
