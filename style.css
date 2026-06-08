@@ -990,7 +990,7 @@ ul { list-style: none; }
 }
 
 @media (max-width: 768px) {
-  .container { padding: 0 24px; }
+  .container { padding: 0 30x; }
 
   .nav-links { display: none; }
   .nav-hamburger { display: flex; }
