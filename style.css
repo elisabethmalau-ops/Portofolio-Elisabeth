@@ -533,77 +533,9 @@ ul { list-style: none; }
 ════════════════════════════════════════════════ */
 .skills {
   width: 100%;
-  height: 500px;
-  padding: 2rem 0 2rem;
+  padding: 4rem 0 3rem;
   background: var(--color-primary-lt);
   position: relative;
-}
-/* card skill */
-/* card skill */
-.skill-card {
-    margin-top: 60px;
-  /* MENGGUNAKAN GRID: Membuat semua elemen di dalamnya menumpuk rapi di tengah */
-  display: grid;
-  grid-template-areas: "stack";
-  justify-content: center;
-  align-items: center;
-
-  background: var(--color-white);
-  border-radius: 20px;
-  box-shadow: var(--shadow-card);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-/* Efek angkat sedikit saat kartu di-hover (opsional, biar lebih hidup) */
-.skill-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-hover);
-}
-
-/* Mengatur semua gambar di dalam card */
-.skill-card img {
-  grid-area: stack; /* Memaksa kedua gambar berada di koordinat grid yang sama */
-  width: 70px;
-  height: 70px;
-  object-fit: cover;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-/* gambar pertama (default) */
-.skill-default {
-  opacity: 1;
-  transform: scale(1);
-}
-
-/* gambar kedua (hover) */
-.skill-hover {
-  opacity: 0;
-  transform: scale(1); /* Ukuran penuh sejak awal, tidak diperkecil */
-}
-
-/* --- LOGIKA HOVER --- */
-
-/* Saat kartu di-hover: gambar default menghilang dan sedikit mengecil */
-.skill-card:hover .skill-default {
-  opacity: 0;
-  transform: scale(0.9);
-}
-
-/* Saat kartu di-hover: gambar hover muncul dengan ukuran penuh yang pas */
-.skill-card:hover .skill-hover {
-  opacity: 1;
-  transform: scale(1);
-}
-
-/* nama (jika ada teks nantinya, tidak akan rusak) */
-.skill-name{
-    position:absolute;
-    bottom:15px;
-    width:100%;
-    text-align:center;
-    z-index:10;
-   font-size:0.85rem;
-    word-break:break-word;
 }
 
 .skills-grid {
@@ -614,43 +546,100 @@ ul { list-style: none; }
   align-items: center;
   gap: 1.25rem;
 }
+
+.skill-card {
+  margin-top: 0;
+  position: relative;
+  overflow: hidden;
+  background: var(--color-white);
+  border-radius: 20px;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 170px;
+  height: 170px;
+}
+
+.skill-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
+}
+
+.skill-card img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.skill-default {
+  opacity: 1;
+  transform: scale(1);
+  z-index: 1;
+}
+
+.skill-hover {
+  opacity: 0;
+  transform: scale(1);
+  z-index: 2;
+}
+
+.skill-card:hover .skill-default {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+.skill-card:hover .skill-hover {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.skill-name {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 700;
+  z-index: 3;
+}
+
 /* ════════════════════════════════════════════════
    RESPONSIVE
 ════════════════════════════════════════════════ */
 @media (max-width: 768px) {
-
-.hero-content {
-  flex-direction: column-reverse;
-  align-items: center;
-  text-align: center;
-  padding-top: 1.5rem;    
-  padding-bottom: 1rem;    
-  gap: 1rem;                
-}
-
-.hero-photo-ring {
-  width: 220px;           
-  height: 220px;
-}
-
-.hero-photo-wrap {
-  margin-bottom: 0;        
-}
-
-@media (max-width: 768px) {
-  .hero-content {
-    gap: 0;
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
+  .skills {
+    padding: 3rem 0 2.5rem;
   }
 
-  .hero-photo-wrap {
-    margin-bottom: -3rem;
+  .skills-grid {
+    gap: 1rem;
+    padding: 0 1rem;
   }
 
-  .hero-photo-ring {
-    width: 240px;
-    height: 240px;
+  .skill-card {
+    width: 120px;
+    height: 120px;
+    border-radius: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .skills {
+    padding: 2.5rem 0 2rem;
+  }
+
+  .skills-grid {
+    gap: 0.75rem;
+    padding: 0 0.75rem;
+  }
+
+  .skill-card {
+    width: 100px;
+    height: 100px;
+    border-radius: 14px;
   }
 }
 /* ════════════════════════════════════════════════
@@ -735,6 +724,7 @@ ul { list-style: none; }
   text-shadow: 0 2px 8px rgba(0,0,0,0.4);
 }
 
+/* ── Hover overlay untuk kartu tanpa img-hover (Kalkulator & Desain) ── */
 .project-thumb .hover-overlay {
   position: absolute;
   inset: 0;
@@ -749,24 +739,16 @@ ul { list-style: none; }
   align-items: center;
   justify-content: center;
   gap: 0.45rem;
-  opacity: 0;           /* ← default sembunyi */
-  pointer-events: none; /* ← tidak mengganggu klik saat tersembunyi */
+  opacity: 0;
   transition: opacity 0.4s ease;
   z-index: 2;
+  /* Padding agar konten tidak mepet ke tepi box */
   padding: 1.25rem 1.5rem;
 }
-
-/* Desktop */
 .project-thumb:hover .hover-overlay {
   opacity: 1;
-  pointer-events: auto;
 }
 
-/* Mobile touch */
-.hover-overlay.touch-active {
-  opacity: 1;
-  pointer-events: auto;
-}
 /* Gambar default ikut scale saat hover pada kartu tanpa img-hover */
 .project-thumb:has(.hover-overlay):hover .img-default {
   transform: scale(1.05);
@@ -965,11 +947,6 @@ ul { list-style: none; }
 /* ════════════════════════════════════════════════
    RESPONSIVE
 ════════════════════════════════════════════════ */
-@media (max-width: 1024px) {
-  .about-inner { gap: 3rem; }
-  .about-photo-frame { width: 300px; }
-}
-
 @media (max-width: 1024px) {
   .about-inner { gap: 3rem; }
   .about-photo-frame { width: 300px; }
