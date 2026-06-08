@@ -563,9 +563,9 @@ ul { list-style: none; }
 /* Mengatur semua gambar di dalam card */
 .skill-card img {
   grid-area: stack; /* Memaksa kedua gambar berada di koordinat grid yang sama */
-  width: 170px;
-  height: 170px;
-  object-fit: contain;
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
@@ -596,12 +596,14 @@ ul { list-style: none; }
 }
 
 /* nama (jika ada teks nantinya, tidak akan rusak) */
-.skill-name {
-  grid-area: stack;
-  align-self: end;
-  font-size: 5rem;
-  font-weight: 700;
-  text-align: center;
+.skill-name{
+    position:absolute;
+    bottom:15px;
+    width:100%;
+    text-align:center;
+    z-index:10;
+   font-size:0.85rem;
+    word-break:break-word;
 }
 
 .skills-grid {
