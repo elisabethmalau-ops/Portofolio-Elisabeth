@@ -610,19 +610,21 @@ ul { list-style: none; }
    RESPONSIVE
 ════════════════════════════════════════════════ */
 @media (max-width: 768px) {
-  .skills {
-    padding: 3rem 0 2.5rem;
+  .hero-content {
+    flex-direction: column-reverse;
+    align-items: center;
+    text-align: center;
+
+    gap: 1rem; /* sebelumnya 3rem */
+    padding-top: 1rem;
   }
 
-  .skills-grid {
-    gap: 1rem;
-    padding: 0 1rem;
+  .hero-photo-wrap{
+    margin-bottom: 0;
   }
 
-  .skill-card {
-    width: 120px;
-    height: 120px;
-    border-radius: 16px;
+  .hero-text{
+    margin-top: -10px;
   }
 }
 
