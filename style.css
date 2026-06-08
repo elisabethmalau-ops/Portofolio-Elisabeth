@@ -533,9 +533,75 @@ ul { list-style: none; }
 ════════════════════════════════════════════════ */
 .skills {
   width: 100%;
-  padding: 4rem 0 3rem;
+  height: 500px;
+  padding: 2rem 0 2rem;
   background: var(--color-primary-lt);
   position: relative;
+}
+/* card skill */
+/* card skill */
+.skill-card {
+    margin-top: 60px;
+  /* MENGGUNAKAN GRID: Membuat semua elemen di dalamnya menumpuk rapi di tengah */
+  display: grid;
+  grid-template-areas: "stack";
+  justify-content: center;
+  align-items: center;
+
+  background: var(--color-white);
+  border-radius: 20px;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efek angkat sedikit saat kartu di-hover (opsional, biar lebih hidup) */
+.skill-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
+}
+
+/* Mengatur semua gambar di dalam card */
+.skill-card img {
+  grid-area: stack; /* Memaksa kedua gambar berada di koordinat grid yang sama */
+  width: 170px;
+  height: 170px;
+  object-fit: contain;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* gambar pertama (default) */
+.skill-default {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* gambar kedua (hover) */
+.skill-hover {
+  opacity: 0;
+  transform: scale(1); /* Ukuran penuh sejak awal, tidak diperkecil */
+}
+
+/* --- LOGIKA HOVER --- */
+
+/* Saat kartu di-hover: gambar default menghilang dan sedikit mengecil */
+.skill-card:hover .skill-default {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+/* Saat kartu di-hover: gambar hover muncul dengan ukuran penuh yang pas */
+.skill-card:hover .skill-hover {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* nama (jika ada teks nantinya, tidak akan rusak) */
+.skill-name {
+  grid-area: stack;
+  align-self: end;
+  font-size: 5rem;
+  font-weight: 700;
+  text-align: center;
 }
 
 .skills-grid {
@@ -546,66 +612,6 @@ ul { list-style: none; }
   align-items: center;
   gap: 1.25rem;
 }
-
-.skill-card {
-  margin-top: 0;
-  position: relative;
-  overflow: hidden;
-  background: var(--color-white);
-  border-radius: 20px;
-  box-shadow: var(--shadow-card);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  width: 170px;
-  height: 170px;
-}
-
-.skill-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-hover);
-}
-
-.skill-card img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.skill-default {
-  opacity: 1;
-  transform: scale(1);
-  z-index: 1;
-}
-
-.skill-hover {
-  opacity: 0;
-  transform: scale(1);
-  z-index: 2;
-}
-
-.skill-card:hover .skill-default {
-  opacity: 0;
-  transform: scale(0.9);
-}
-
-.skill-card:hover .skill-hover {
-  opacity: 1;
-  transform: scale(1);
-}
-
-.skill-name {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  text-align: center;
-  font-size: 1rem;
-  font-weight: 700;
-  z-index: 3;
-}
-
 /* ════════════════════════════════════════════════
    RESPONSIVE
 ════════════════════════════════════════════════ */
