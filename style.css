@@ -610,20 +610,23 @@ ul { list-style: none; }
    RESPONSIVE
 ════════════════════════════════════════════════ */
 @media (max-width: 768px) {
-  .hero-content {
-    gap: 0;
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
-  }
 
-  .hero-photo-wrap {
-    margin-bottom: -3rem;
-  }
+.hero-content {
+  flex-direction: column-reverse;
+  align-items: center;
+  text-align: center;
+  padding-top: 1.5rem;    
+  padding-bottom: 1rem;    
+  gap: 1rem;                
+}
 
-  .hero-photo-ring {
-    width: 240px;
-    height: 240px;
-  }
+.hero-photo-ring {
+  width: 220px;           
+  height: 220px;
+}
+
+.hero-photo-wrap {
+  margin-bottom: 0;        
 }
 
 @media (max-width: 768px) {
