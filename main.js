@@ -72,12 +72,12 @@ document.addEventListener('DOMContentLoaded', () => {
   setupNavbar();
   setupScrollAnimations();
   setupHamburger();
+  setupTouchHover(); // ← tambahan baru
 });
 
 
 /* ═══════════════════════════════════════════════════
    3. IMAGE INJECTION
-   Uses base64 strings from assets.js (ASSETS object)
 ═══════════════════════════════════════════════════ */
 function injectImages() {
   if (typeof ASSETS === 'undefined') {
@@ -85,23 +85,14 @@ function injectImages() {
     return;
   }
 
-  // Hero profile photo
   const heroPhoto = document.getElementById('heroPhoto');
-  if (heroPhoto && ASSETS.profile) {
-    heroPhoto.src = ASSETS.profile;
-  }
+  if (heroPhoto && ASSETS.profile) heroPhoto.src = ASSETS.profile;
 
-  // About section photo (use same profile image)
   const aboutPhoto = document.getElementById('aboutPhoto');
-  if (aboutPhoto && ASSETS.profile) {
-    aboutPhoto.src = ASSETS.profile;
-  }
+  if (aboutPhoto && ASSETS.profile) aboutPhoto.src = ASSETS.profile;
 
-  // GitHub icon in contact
   const githubIcon = document.getElementById('githubIcon');
-  if (githubIcon && ASSETS.github) {
-    githubIcon.src = ASSETS.github;
-  }
+  if (githubIcon && ASSETS.github) githubIcon.src = ASSETS.github;
 }
 
 
@@ -147,7 +138,6 @@ function buildProjectCards() {
     card.className = 'project-card';
     card.style.transitionDelay = `${index * 100}ms`;
 
-    // Thumbnail with overlay title
     const thumbDiv = document.createElement('div');
     thumbDiv.className = 'project-thumb';
 
@@ -169,7 +159,6 @@ function buildProjectCards() {
     thumbDiv.appendChild(img);
     thumbDiv.appendChild(overlay);
 
-    // Body
     const body = document.createElement('div');
     body.className = 'project-body';
 
@@ -202,19 +191,15 @@ function buildProjectCards() {
 function setupNavbar() {
   const navbar   = document.getElementById('navbar');
   const navLinks = document.querySelectorAll('.nav-link');
-
-  // Sections to track for active link highlighting
   const sections = ['hero', 'about', 'skills', 'projects', 'contact'];
 
   function onScroll() {
-    // Add shadow when scrolled
     if (window.scrollY > 20) {
       navbar.classList.add('scrolled');
     } else {
       navbar.classList.remove('scrolled');
     }
 
-    // Determine active section
     let current = 'hero';
     sections.forEach(id => {
       const el = document.getElementById(id);
@@ -234,13 +219,12 @@ function setupNavbar() {
   }
 
   window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll(); // run once on load
+  onScroll();
 
-  // Smooth-close mobile menu on link click
   navLinks.forEach(link => {
     link.addEventListener('click', () => {
       const mobileMenu = document.getElementById('mobileMenu');
-      const hamburger   = document.getElementById('hamburger');
+      const hamburger  = document.getElementById('hamburger');
       if (mobileMenu) mobileMenu.classList.remove('open');
       if (hamburger)  hamburger.classList.remove('open');
     });
@@ -261,7 +245,6 @@ function setupScrollAnimations() {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('is-visible');
-        // Keep observing project/skill cards so they re-animate if needed
         if (!entry.target.classList.contains('skill-card') &&
             !entry.target.classList.contains('project-card')) {
           observer.unobserve(entry.target);
@@ -270,11 +253,8 @@ function setupScrollAnimations() {
     });
   }, options);
 
-  // Observe data-animate elements
   document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
 
-  // Observe skill and project cards after they're built
-  // (called after DOM update with requestAnimationFrame)
   requestAnimationFrame(() => {
     document.querySelectorAll('.skill-card, .project-card').forEach(el => {
       observer.observe(el);
@@ -296,4 +276,41 @@ function setupHamburger() {
     btn.classList.toggle('open', isOpen);
     btn.setAttribute('aria-expanded', isOpen);
   });
+}
+
+
+/* ═══════════════════════════════════════════════════
+   9. TOUCH HOVER — untuk mobile (Kalkulator & Desain)
+═══════════════════════════════════════════════════ */
+function setupTouchHover() {
+  const cards = document.querySelectorAll('.project-card');
+
+  cards.forEach(card => {
+    const overlay = card.querySelector('.hover-overlay');
+    if (!overlay) return; // skip CafeinAja & Portofolio
+
+    card.addEventListener('touchstart', (e) => {
+      e.stopPropagation();
+      const isActive = overlay.classList.contains('touch-active');
+
+      // Tutup semua overlay dulu
+      document.querySelectorAll('.hover-overlay.touch-active').forEach(el => {
+        el.classList.remove('touch-active');
+      });
+
+      // Toggle: jika belum aktif buka, jika sudah aktif tutup
+      if (!isActive) {
+        overlay.classList.add('touch-active');
+      }
+    }, { passive: true });
+  });
+
+  // Sentuh di luar card = tutup semua
+  document.addEventListener('touchstart', (e) => {
+    if (!e.target.closest('.project-card')) {
+      document.querySelectorAll('.hover-overlay.touch-active').forEach(el => {
+        el.classList.remove('touch-active');
+      });
+    }
+  }, { passive: true });
 }
